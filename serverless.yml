@@ -1,0 +1,25 @@
+service: challenge-vale
+
+frameworkVersion: '2.9'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+plugins:
+  - serverless-s3-local
+  - serverless-offline
+
+functions:
+  hello:
+    name: hello
+    handler: handler.handler
+    events:
+      - http:
+          method: post
+          path: hello
+
+custom:
+  s3:
+      directory: /tmp
+      bucket: 'local-bucket'
